@@ -6,6 +6,7 @@ package ru.spbu.apcyb.svp.tasks;
 public class Task2 {
 
   public static void main(String[] args) {
-
+    //MyList
+    //MyStack
   }
 }
