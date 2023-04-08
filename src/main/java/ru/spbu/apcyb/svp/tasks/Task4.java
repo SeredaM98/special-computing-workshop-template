@@ -89,9 +89,10 @@ public class Task4 {
             new FileWriter(".\\src\\main\\java\\ru\\spbu\\apcyb\\svp\\tasks\\output.txt"))) {
       long multiThreadTime = multiThreadTan(count, 10, reader, writer);
       long singleThreadTime = singleThreadTan(count, reader, writer);
-
-      Log.info("Многопоточное время: " + multiThreadTime + "ms");
-      Log.info("Однопоточное время: " + singleThreadTime + "ms");
+      String message = "Многопоточное время: " + multiThreadTime + "ms";
+      Log.info(message);
+      message = "Однопоточное время: " + singleThreadTime + "ms";
+      Log.info(message);
 
     } catch (IOException exception) {
       throw new IOException(exception.getMessage());
