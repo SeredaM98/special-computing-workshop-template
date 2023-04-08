@@ -1,0 +1,6 @@
+.\src\test\java\ru\spbu\apcyb\svp\tasks\Test3Dir
+.\src\test\java\ru\spbu\apcyb\svp\tasks\Test3Dir\1
+.\src\test\java\ru\spbu\apcyb\svp\tasks\Test3Dir\1\test.txt
+.\src\test\java\ru\spbu\apcyb\svp\tasks\Test3Dir\1\test2.txt
+.\src\test\java\ru\spbu\apcyb\svp\tasks\Test3Dir\actual.txt
+.\src\test\java\ru\spbu\apcyb\svp\tasks\Test3Dir\expected.txt
