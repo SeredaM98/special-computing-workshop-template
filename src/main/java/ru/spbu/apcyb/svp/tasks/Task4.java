@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class Task4 {
 
-  static Logger Log = Logger.getLogger(Task4.class.getName());
+  static Logger log = Logger.getLogger(Task4.class.getName());
 
   /**
    * Многопоточное вычисление тангенсов.
@@ -46,7 +46,7 @@ public class Task4 {
         i += k;
       }
     } catch (ExecutionException | InterruptedException exception) {
-      Log.severe("Ошибка потока " + Thread.currentThread().getName());
+      log.severe("Ошибка потока " + Thread.currentThread().getName());
       Thread.currentThread().interrupt();
     } finally {
       executorService.shutdown();
@@ -90,9 +90,9 @@ public class Task4 {
       long multiThreadTime = multiThreadTan(count, 10, reader, writer);
       long singleThreadTime = singleThreadTan(count, reader, writer);
       String message = "Многопоточное время: " + multiThreadTime + "ms";
-      Log.info(message);
+      log.info(message);
       message = "Однопоточное время: " + singleThreadTime + "ms";
-      Log.info(message);
+      log.info(message);
 
     } catch (IOException exception) {
       throw new IOException(exception.getMessage());
