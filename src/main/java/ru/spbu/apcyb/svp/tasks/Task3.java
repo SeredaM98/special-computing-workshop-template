@@ -39,7 +39,7 @@ public class Task3 {
           writer.write(findPaths(file));
           writer.flush();
         } catch (IOException exception) {
-          throw new RuntimeException(exception.getMessage());
+          throw new IOException(exception.getMessage());
         }
       } else {
         throw new FileNotFoundException("Дирректории обхода не существует");
