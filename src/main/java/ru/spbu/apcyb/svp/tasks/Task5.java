@@ -2,7 +2,6 @@ package ru.spbu.apcyb.svp.tasks;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InterruptedIOException;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -13,6 +12,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 /**
@@ -20,9 +21,11 @@ import java.util.stream.Stream;
  */
 public class Task5 {
 
+  static Logger log = Logger.getLogger(Task5.class.getName());
+
   /**
    * Main.
-   * */
+   */
   public static void main(String[] args) throws IOException {
     String book = ".\\src\\main\\java\\ru\\spbu\\apcyb\\svp\\tasks\\book.txt";
     String outCountFile = ".\\src\\main\\java\\ru\\spbu\\apcyb\\svp\\tasks\\wordCounts.txt";
@@ -95,10 +98,11 @@ public class Task5 {
     }
     try {
       if (!executorService.awaitTermination(1, TimeUnit.MINUTES)) {
-        throw new RuntimeException("Termination timeout");
+        log.log(Level.WARNING, "Termination timeout");
       }
     } catch (InterruptedException exception) {
-      throw new InterruptedIOException("Запись файлов wordFiles была прервана");
+      log.log(Level.WARNING, "Interrupted!", exception);
+      Thread.currentThread().interrupt();
     }
 
   }
