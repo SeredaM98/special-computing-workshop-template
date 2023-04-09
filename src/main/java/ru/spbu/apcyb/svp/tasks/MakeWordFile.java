@@ -11,7 +11,7 @@ public class MakeWordFile implements Runnable {
   private final String word;
   private final Integer num;
   private final String dir;
-
+  static Logger log = Logger.getLogger(MakeWordFile.class.getName());
   /**
    * Создаем слову соответствующий файл.
    *
@@ -37,7 +37,7 @@ public class MakeWordFile implements Runnable {
       try (FileWriter fileWriter = new FileWriter(out)) {
         fileWriter.write(String.join(" ", Collections.nCopies(num, word)));
       } catch (IOException e) {
-        e.printStackTrace();
+       log.severe(e.getMessage());
       }
     }
   }
