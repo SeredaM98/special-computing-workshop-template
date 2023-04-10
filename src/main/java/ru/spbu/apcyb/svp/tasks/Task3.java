@@ -35,6 +35,9 @@ public class Task3 {
     if (args.length >= 2) {
       File file = new File(args[0]);
       if (file.exists()) {
+      if (new File(args[1]).isDirectory()) {
+          throw new IOException("Файл записи является директорией");
+        }
         try (FileWriter writer = new FileWriter(args[1], false)) {
           writer.write(findPaths(file));
           writer.flush();
