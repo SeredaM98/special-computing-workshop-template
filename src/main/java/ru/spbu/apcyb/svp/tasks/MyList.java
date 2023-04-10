@@ -34,7 +34,7 @@ public class MyList implements List<Object> {
   @Override
   public boolean add(Object e) throws NullPointerException {
     if (e == null) {
-      throw new NullPointerException();
+      throw new NullPointerException("Добавление NULL");
     }
     int i = size;
     if (i == data.length) {
@@ -52,10 +52,10 @@ public class MyList implements List<Object> {
   public void add(int index, Object e)
       throws IndexOutOfBoundsException, NullPointerException {
     if (index > size) {
-      throw new IndexOutOfBoundsException();
+      throw new IndexOutOfBoundsException("Индекс за пределом списка");
     }
     if (e == null) {
-      throw new NullPointerException();
+      throw new NullPointerException("Добавление NULL");
     }
     if (size == data.length) {
       resize();
@@ -73,7 +73,7 @@ public class MyList implements List<Object> {
   @Override
   public Object get(int index) throws IndexOutOfBoundsException {
     if (index >= size) {
-      throw new IndexOutOfBoundsException();
+      throw new IndexOutOfBoundsException("Индекс за пределом списка");
     }
     return data[index];
   }
@@ -105,7 +105,7 @@ public class MyList implements List<Object> {
   @Override
   public Object remove(int index) throws IndexOutOfBoundsException {
     if (index >= size) {
-      throw new IndexOutOfBoundsException();
+      throw new IndexOutOfBoundsException("Индекс за пределом списка");
     }
     Object e = data[index];
     System.arraycopy(data, index + 1, data, index, size - index - 1);
