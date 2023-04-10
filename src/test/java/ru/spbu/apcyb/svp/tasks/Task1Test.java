@@ -12,22 +12,22 @@ public class Task1Test {
 
   @Test
   void inputTest() {
-    Assertions.assertArrayEquals(new long[] {1,2,3},Task1.get_notes("2  3 1"));
+    Assertions.assertArrayEquals(new long[] {1,2,3},Task1.getNotes("2  3 1"));
     Assertions.assertThrows(NumberFormatException.class,
-        () ->Task1.get_notes("2ts  3 1"));
+        () ->Task1.getNotes("2ts  3 1"));
   }
 
   @Test
   void exceptionsTest() {
     long[] dummy = {1, 2};
     Assertions.assertThrows(IllegalArgumentException.class,
-        () -> Task1.find_combinations(-4, dummy));
+        () -> Task1.findCombinations(-4, dummy));
     long[] emptyDummy = new long[]{};
     Assertions.assertThrows(IllegalArgumentException.class,
-        () -> Task1.find_combinations(4, emptyDummy));
+        () -> Task1.findCombinations(4, emptyDummy));
     dummy[0] = -1;
     Assertions.assertThrows(IllegalArgumentException.class,
-        () -> Task1.find_combinations(4, dummy));
+        () -> Task1.findCombinations(4, dummy));
   }
 
   @Test
@@ -35,7 +35,7 @@ public class Task1Test {
     long[] testNotes = new long[] {1};
     List<long[]> expectedCombinations = new ArrayList<>();
     expectedCombinations.add(new long[]{4});
-    List<long[]> actualCombinations = Task1.find_combinations(4,testNotes);
+    List<long[]> actualCombinations = Task1.findCombinations(4,testNotes);
     Assertions.assertArrayEquals(expectedCombinations.toArray(),actualCombinations.toArray());
 
   }
@@ -47,7 +47,7 @@ public class Task1Test {
     expectedCombinations.add(new long[]{4,0});
     expectedCombinations.add(new long[]{2,1});
     expectedCombinations.add(new long[]{0,2});
-    List<long[]> actualCombinations = Task1.find_combinations(4,testNotes);
+    List<long[]> actualCombinations = Task1.findCombinations(4,testNotes);
     Assertions.assertArrayEquals(expectedCombinations.toArray(),actualCombinations.toArray());
 
   }

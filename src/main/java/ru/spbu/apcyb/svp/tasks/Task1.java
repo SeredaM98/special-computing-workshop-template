@@ -4,8 +4,10 @@ package ru.spbu.apcyb.svp.tasks;
 import com.google.common.primitives.Longs;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.logging.Logger;
 
 /**
@@ -27,13 +29,13 @@ public class Task1 {
       throw new RuntimeException("Неверный ввод суммы размена.");
     }
     String str = in.nextLine();
-    long[] notes = get_notes(str);
+    long[] notes = getNotes(str);
     List<long[]> combinations;
-    combinations = find_combinations(amount, notes);
+    combinations = findCombinations(amount, notes);
     StringBuilder res = new StringBuilder(("Комбинации:\n"));
     Log.info("Количество кобинаций: " + combinations.size());
     for (long[] combination : combinations) {
-      res.append(comb_to_string(notes, combination)).append("\n");
+      res.append(combToString(notes, combination)).append("\n");
     }
     Log.info(res.toString());
   }
@@ -41,29 +43,22 @@ public class Task1 {
   /**
    * Преобразование строки в отсортированный набор купюр.
    */
-  public static long[] get_notes(String str) {
+  public static long[] getNotes(String str) {
     while (str.contains("  ")) {
       str = str.replace("  ", " ");
     }
     String[] dt = str.trim().split(" ");
-    long[] notes = new long[dt.length];
+    Set<Long> notes = new HashSet<>();
 
-    for (int i = 0; i < dt.length; i++) {
+    for (String s : dt) {
       try {
-        notes[i] = Long.parseLong(dt[i]);
+        notes.add(Long.parseLong(s));
 
       } catch (NumberFormatException e) {
         throw new NumberFormatException("Неверный ввод купюр.");
       }
     }
-    Arrays.sort(notes);
-    ArrayList<Long> newnotes = new ArrayList<>();
-    for (long note : notes) {
-      if (Arrays.binarySearch(newnotes.toArray(), note) < 0) {
-        newnotes.add(note);
-      }
-    }
-    return Longs.toArray(newnotes);
+    return Longs.toArray(notes);
   }
 
   /**
@@ -80,7 +75,7 @@ public class Task1 {
   /**
    * Формирование строки для комбинации.
    */
-  private static String comb_to_string(long[] notes, long[] currcomb) {
+  private static String combToString(long[] notes, long[] currcomb) {
     StringBuilder output = new StringBuilder();
     for (int i = 0; i < notes.length; i++) {
       output.append(currcomb[i]).append("[").append(notes[i]).append("] ");
@@ -92,9 +87,9 @@ public class Task1 {
   /**
    * Поиск комбинаций.
    */
-  public static List<long[]> find_combinations(long amount, long[] notes) {
+  public static List<long[]> findCombinations(long amount, long[] notes) {
     List<long[]> combinations = new ArrayList<>();
-    long[] currcomb = new long[notes.length];
+    long[] currComb = new long[notes.length];
     int index = 0;
     if (notes.length == 0) {
       throw new IllegalArgumentException("Требуется хотя бы один номинал купюры");
@@ -107,26 +102,26 @@ public class Task1 {
     }
     while (true) {
 
-      currcomb[index] = (amount - sum(notes, currcomb)) / notes[index];
-      if (sum(notes, currcomb) < amount) {
-        currcomb[index]++;
+      currComb[index] = (amount - sum(notes, currComb)) / notes[index];
+      if (sum(notes, currComb) < amount) {
+        currComb[index]++;
       }
-      if ((amount - sum(notes, currcomb)) % notes[index] == 0) {
+      if ((amount - sum(notes, currComb)) % notes[index] == 0) {
 
         Log.info("Найдена комбинация: "
-            + comb_to_string(notes, currcomb)
+            + combToString(notes, currComb)
             + "\nКобинаций найдено: "
             + (combinations.size() + 1) + "\n");
-        combinations.add(currcomb.clone());
+        combinations.add(currComb.clone());
       }
 
       if (index == notes.length - 1) {
         return combinations;
       } else {
-        for (int i = index; sum(notes, currcomb) >= amount; i++) {
-          currcomb[i] = 0;
+        for (int i = index; sum(notes, currComb) >= amount; i++) {
+          currComb[i] = 0;
           if (i != notes.length - 1) {
-            currcomb[i + 1]++;
+            currComb[i + 1]++;
           } else {
             index++;
           }
