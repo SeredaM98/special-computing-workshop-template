@@ -1,0 +1,6 @@
+rain 1
+be 3
+may 4
+yes 1
+now 2
+me 1
